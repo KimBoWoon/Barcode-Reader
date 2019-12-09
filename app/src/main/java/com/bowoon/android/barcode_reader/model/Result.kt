@@ -4,20 +4,14 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class Result(
-    val value: String,
-    val name: String,
-    val phone: String
+    val result: String
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString() ?: "",
-        parcel.readString() ?: "",
         parcel.readString() ?: ""
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(value)
-        parcel.writeString(name)
-        parcel.writeString(phone)
+
     }
 
     override fun describeContents(): Int {
@@ -33,6 +27,4 @@ data class Result(
             return arrayOfNulls(size)
         }
     }
-
-
 }
