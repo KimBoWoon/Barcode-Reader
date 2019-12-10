@@ -32,15 +32,22 @@ class BarcodeReaderViewFragment : Fragment() {
         if (result != null) {
             if (result.contents == null) {
                 Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show()
+                val fragment = ReadResultFragment().apply {
+                    arguments = Bundle().apply {
+                        putParcelable("barcode", null)
+                    }
+                }
+                requireFragmentManager().popBackStack()
+                FragmentFactory.replaceFragment(requireFragmentManager(), fragment)
             } else {
                 Toast.makeText(context, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
                 val barcode = Barcode(result.contents, "김보운", "010-4742-0181")
-                val bundle = Bundle().apply {
-                    putParcelable("barcode", barcode)
-                }
                 val fragment = ReadResultFragment().apply {
-                    arguments = bundle
+                    arguments = Bundle().apply {
+                        putParcelable("barcode", barcode)
+                    }
                 }
+                requireFragmentManager().popBackStack()
                 FragmentFactory.replaceFragment(requireFragmentManager(), fragment)
             }
         } else {

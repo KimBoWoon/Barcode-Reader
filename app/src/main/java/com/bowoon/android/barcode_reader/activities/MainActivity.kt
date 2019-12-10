@@ -2,8 +2,8 @@ package com.bowoon.android.barcode_reader.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.bowoon.android.barcode_reader.fragments.BarcodeReaderViewFragment
 import com.bowoon.android.barcode_reader.R
+import com.bowoon.android.barcode_reader.fragments.BarcodeReaderViewFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

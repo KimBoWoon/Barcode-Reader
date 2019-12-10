@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.bowoon.android.barcode_reader.R
 import com.bowoon.android.barcode_reader.model.Barcode
@@ -24,14 +25,23 @@ class ReadResultFragment : Fragment() {
         requireArguments().let { arg ->
             val barcode = arg.getParcelable<Barcode>("barcode")
 
-            requireView().barcodeValue.text = barcode.value
+            if (barcode != null) {
+                requireView().barcodeValue.text = barcode.value
 
-            requireView().resultPost.setOnClickListener {
-                Repository.post(barcode)
+                requireView().resultPost.setOnClickListener {
+                    Repository.post(barcode)
+                }
+            }
+
+            if (barcode == null) {
+                Toast.makeText(requireContext(), "결과 값이 없습니다!", Toast.LENGTH_SHORT).show()
             }
 
             requireView().barcodeReader.setOnClickListener {
-                FragmentFactory.replaceFragment(requireFragmentManager(), BarcodeReaderViewFragment())
+                FragmentFactory.replaceFragment(
+                    requireFragmentManager(),
+                    BarcodeReaderViewFragment()
+                )
             }
         }
     }

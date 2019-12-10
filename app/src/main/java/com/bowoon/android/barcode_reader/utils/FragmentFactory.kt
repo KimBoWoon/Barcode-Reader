@@ -8,7 +8,6 @@ object FragmentFactory {
     fun replaceFragment(fragmentManager: FragmentManager, fragment: Fragment) {
         fragmentManager
             .beginTransaction()
-            .addToBackStack(null)
             .replace(R.id.frameContainer, fragment)
             .commit()
     }
