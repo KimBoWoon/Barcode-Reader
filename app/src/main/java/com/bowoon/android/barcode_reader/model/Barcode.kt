@@ -33,6 +33,4 @@ data class Barcode(
             return arrayOfNulls(size)
         }
     }
-
-
 }

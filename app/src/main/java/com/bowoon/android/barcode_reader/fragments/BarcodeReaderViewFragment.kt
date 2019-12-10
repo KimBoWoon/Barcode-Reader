@@ -30,26 +30,25 @@ class BarcodeReaderViewFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if (result != null) {
+            val fragment = ReadResultFragment()
+
             if (result.contents == null) {
-                Toast.makeText(context, "Cancelled", Toast.LENGTH_LONG).show()
-                val fragment = ReadResultFragment().apply {
+                fragment.apply {
                     arguments = Bundle().apply {
                         putParcelable("barcode", null)
                     }
                 }
-                requireFragmentManager().popBackStack()
-                FragmentFactory.replaceFragment(requireFragmentManager(), fragment)
             } else {
-                Toast.makeText(context, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
                 val barcode = Barcode(result.contents, "김보운", "010-4742-0181")
-                val fragment = ReadResultFragment().apply {
+                fragment.apply {
                     arguments = Bundle().apply {
                         putParcelable("barcode", barcode)
                     }
                 }
-                requireFragmentManager().popBackStack()
-                FragmentFactory.replaceFragment(requireFragmentManager(), fragment)
             }
+
+            requireFragmentManager().popBackStack()
+            FragmentFactory.replaceFragment(requireFragmentManager(), fragment)
         } else {
             super.onActivityResult(requestCode, resultCode, data)
         }

@@ -34,7 +34,9 @@ class ReadResultFragment : Fragment() {
             }
 
             if (barcode == null) {
-                Toast.makeText(requireContext(), "결과 값이 없습니다!", Toast.LENGTH_SHORT).show()
+                requireView().resultPost.setOnClickListener {
+                    Toast.makeText(requireContext(), "결과 값이 없습니다!", Toast.LENGTH_SHORT).show()
+                }
             }
 
             requireView().barcodeReader.setOnClickListener {
